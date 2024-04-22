@@ -1,0 +1,88 @@
+model_name: "${input}"
+model_folder: "swmm_models/" # with trailing forward slash
+# state definitions
+states:
+        - !!python/tuple 
+          - norfolk_airport
+          - total_precip
+        - !!python/tuple 
+          - P1
+          - depthN
+        - !!python/tuple
+          - P2
+          - depthN
+        - !!python/tuple
+          - P1J
+          - flooding
+        - !!python/tuple
+          - P2J
+          - flooding
+        - !!python/tuple
+          - PJ3
+          - flooding
+
+# Action space 
+action_space:
+        - "1"
+        - "2"
+
+# these are just state variables used to compute objective functions
+states_for_computing_objectives:
+        - !!python/tuple
+          - "8"
+          - flow
+        - !!python/tuple
+          - "7"
+          - flow
+        - !!python/tuple
+          - "9"
+          - flow
+        - !!python/tuple
+          - OvF1
+          - flow
+        - !!python/tuple
+          - OvF2
+          - flow
+        - !!python/tuple
+          - P1J
+          - flooding
+        - !!python/tuple
+          - P2J
+          - flooding
+        - !!python/tuple
+          - PJ3
+          - flooding
+
+# lagged state variables must be included in either the states or the performance targets
+lagged_state_variables:
+        - !!python/tuple
+          - "8"
+          - flow
+        - !!python/tuple
+          - "7"
+          - flow
+        - !!python/tuple
+          - "9"
+          - flow
+        - !!python/tuple
+          - P1
+          - inflow
+        - !!python/tuple
+          - P2
+          - inflow
+        - !!python/tuple 
+          - P1
+          - depthN
+        - !!python/tuple
+          - P2
+          - depthN
+
+# lags to consider
+lags_hrs:
+        - 1
+        - 2
+        - 4
+        - 8
+        - 16
+        - 24
+        - 48
